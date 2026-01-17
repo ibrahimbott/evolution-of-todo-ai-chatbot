@@ -31,8 +31,14 @@ export default function ChatWindow() {
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const isProduction = process.env.NODE_ENV === 'production'
-    const API_URL = process.env.NEXT_PUBLIC_API_URL !== undefined
-        ? process.env.NEXT_PUBLIC_API_URL
+    let envApiUrl = process.env.NEXT_PUBLIC_API_URL
+    // Safety: If user accidentally set localhost in Vercel Env, ignore it
+    if (isProduction && envApiUrl && envApiUrl.includes('localhost')) {
+        envApiUrl = undefined
+    }
+
+    const API_URL = envApiUrl !== undefined
+        ? envApiUrl
         : (isProduction ? '' : 'http://localhost:8000')
 
     const scrollToBottom = () => {
