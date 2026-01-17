@@ -30,7 +30,10 @@ export default function ChatWindow() {
     const [sidebarOpen, setSidebarOpen] = useState(true)
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
-    const API_URL = process.env.NEXT_PUBLIC_API_URL !== undefined ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:8000'
+    const isProduction = process.env.NODE_ENV === 'production'
+    const API_URL = process.env.NEXT_PUBLIC_API_URL !== undefined
+        ? process.env.NEXT_PUBLIC_API_URL
+        : (isProduction ? '' : 'http://localhost:8000')
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
