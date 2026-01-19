@@ -495,10 +495,16 @@ def chat_with_ai(
             
         except Exception as google_e:
             # Instead of crashing, return a helpful message to the user
-            error_msg = "⚠️ **System Error**: I am unable to connect to the AI services.\n\n" \
-                        "This usually means the **API Keys** in the server configuration are missing or invalid.\n" \
-                        "Please check the `api/.env` file and update `OPENROUTER_API_KEY`."
-            print(f"All AI providers failed. Returning error message to user. OR Error: {e}")
+            or_key = os.getenv("OPENROUTER_API_KEY", "")
+            google_key = os.getenv("GOOGLE_API_KEY", "")
+            
+            debug_info = f"OR Key: {or_key[:5]}... | Google Key: {google_key[:5]}..."
+            
+            error_msg = f"⚠️ **System Error**: I am unable to connect to the AI services.\n\n" \
+                        f"**Debug Info:** `{debug_info}`\n\n" \
+                        "If the keys start with `sk-or...` and `AIza...`, they are loaded.\n" \
+                        "If they are empty, please add them to Vercel Settings."
+            print(f"All AI providers failed. {debug_info} OR Error: {e}")
             return ChatResponse(response=error_msg, source="System Error")
 
 
