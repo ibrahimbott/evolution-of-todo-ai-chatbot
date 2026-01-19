@@ -13,10 +13,10 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "api/index.py"
+      "destination": "/api/index.py"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|_next/|static/|favicon.ico).*)",
       "destination": "/web-app/$1"
     }
   ]
