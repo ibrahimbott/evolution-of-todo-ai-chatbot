@@ -25,20 +25,20 @@ export default function HomePage() {
                     {/* Badge */}
                     <div className="inline-flex items-center gap-2 px-4 py-2 glass rounded-full text-purple-300 text-xs sm:text-sm mb-6 sm:mb-8">
                         <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                        Hackathon II • Phase 2 Complete
+                        Hackathon II • Phase 2 & 3 Complete
                     </div>
 
                     {/* Title */}
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-4 sm:mb-6 leading-tight">
                         TaskFlow
                         <span className="block gradient-text mt-2">
-                            Full Stack Todo App
+                            AI-Powered Todo App
                         </span>
                     </h1>
 
                     {/* Subtitle */}
                     <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
-                        JWT Authentication • User Data Isolation • PostgreSQL • Next.js + FastAPI
+                        Natural Language Chat • AI Agents • MCP Tools • Full Stack • Next.js + FastAPI
                     </p>
 
                     {/* CTAs */}
@@ -61,11 +61,41 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* Features Section */}
-            <section className="relative px-4 sm:px-6 lg:px-8 py-16">
+            {/* Features Section - Phase 3 */}
+            <section className="relative px-4 sm:px-6 lg:px-8 py-8">
                 <div className="max-w-6xl mx-auto">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12 animate-fadeIn">
-                        Phase 2 Requirements <span className="text-green-400">✓ Complete</span>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 animate-fadeIn">
+                        Phase 3: AI Chatbot <span className="text-green-400">✓ Complete</span>
+                    </h2>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        {[
+                            { icon: '🤖', title: 'AI Tasks Agent', desc: 'Google Gemini 2.0 Flash Integration' },
+                            { icon: '💬', title: 'Natural Language', desc: '"Remind me to buy milk tomorrow"' },
+                            { icon: '🛠️', title: 'MCP Protocol', desc: 'Standardized Model Context Protocol' },
+                            { icon: '🔌', title: 'Stateless API', desc: 'Resilient POST /api/chat Endpoint' },
+                            { icon: '🧠', title: 'Context Aware', desc: 'Maintains conversation history' },
+                            { icon: '🚀', title: 'Automated Actions', desc: 'AI performs DB operations autonomously' },
+                        ].map((feature, i) => (
+                            <div
+                                key={i}
+                                className={`glass-card p-6 card-hover animate-fadeIn stagger-${i + 1}`}
+                                style={{ borderColor: 'rgba(168, 85, 247, 0.4)' }}
+                            >
+                                <div className="text-3xl mb-4">{feature.icon}</div>
+                                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                                <p className="text-slate-400 text-sm">{feature.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Features Section - Phase 2 */}
+            <section className="relative px-4 sm:px-6 lg:px-8 py-8">
+                <div className="max-w-6xl mx-auto">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 animate-fadeIn">
+                        Phase 2: Full Stack Auth <span className="text-green-400">✓ Complete</span>
                     </h2>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -94,7 +124,7 @@ export default function HomePage() {
             <section className="relative px-4 sm:px-6 lg:px-8 py-16">
                 <div className="max-w-2xl mx-auto text-center glass-card p-8 sm:p-12 animate-fadeIn">
                     <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to Start?</h2>
-                    <p className="text-slate-300 mb-8">Create an account and manage your tasks securely.</p>
+                    <p className="text-slate-300 mb-8">Experience the future of task management with AI.</p>
                     {!isLoggedIn && (
                         <Link href="/signup" className="btn-primary inline-block">
                             Create Free Account
@@ -108,7 +138,7 @@ export default function HomePage() {
                 <p className="text-slate-500 text-sm">
                     Developer: <span className="text-purple-400">Ibrahim Tayyab</span>
                 </p>
-                <p className="text-slate-600 text-xs mt-2">Hackathon II • Phase 2 • 2026</p>
+                <p className="text-slate-600 text-xs mt-2">Hackathon II • Phase 2 & 3 • 2026</p>
             </footer>
         </div>
     )
