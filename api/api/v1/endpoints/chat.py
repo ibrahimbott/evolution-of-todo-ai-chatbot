@@ -21,7 +21,7 @@ router = APIRouter()
 # --- Configuration ---
 # Order of preference for unlimited/free models
 OPENROUTER_MODELS = [
-    "openai/gpt-4o-mini", # Better and cheaper than 3.5
+    "openai/gpt-oss-20b:free", # Better and cheaper than 3.5
     "google/gemini-1.5-flash",
     "meta-llama/llama-3.2-3b-instruct:free",
 ]
@@ -381,6 +381,7 @@ def call_google(messages, tools_definitions):
 # --- Main Endpoint ---
 
 @router.post("/", response_model=ChatResponse)
+@router.post("", response_model=ChatResponse, include_in_schema=False)
 def chat_with_ai(
     request: ChatRequest,
     session: Session = Depends(get_session),
