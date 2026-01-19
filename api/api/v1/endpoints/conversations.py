@@ -16,7 +16,8 @@ def get_conversation_service():
     return ConversationService(repository)
 
 
-@router.post("/", response_model=ConversationRead)
+@router.post("", response_model=ConversationRead)
+@router.post("/", response_model=ConversationRead, include_in_schema=False)
 def create_conversation(
     conversation_data: ConversationCreate,
     session: Session = Depends(get_session),
@@ -27,7 +28,8 @@ def create_conversation(
     return conversation_service.create_conversation(session, user_id, conversation_data.title)
 
 
-@router.get("/", response_model=List[ConversationRead])
+@router.get("", response_model=List[ConversationRead])
+@router.get("/", response_model=List[ConversationRead], include_in_schema=False)
 def list_conversations(
     session: Session = Depends(get_session),
     conversation_service: ConversationService = Depends(get_conversation_service),

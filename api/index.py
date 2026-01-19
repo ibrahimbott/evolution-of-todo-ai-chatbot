@@ -1,14 +1,22 @@
 import sys
 import os
 
-# Temporary fix for .env encoding issues
-os.environ["DATABASE_URL"] = "postgresql+psycopg://neondb_owner:npg_S12VpPEGnBkA@ep-dark-surf-aesp74dc-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-os.environ["BETTER_AUTH_SECRET"] = "your-secret-key-change-in-production"
-os.environ["OPENROUTER_API_KEY"] = "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"
-os.environ["GOOGLE_API_KEY"] = "AIzaSyDj6sDIdrwwbJGgF7zB_lIg2jBBhR-XniA"
+# Temporary fix for .env encoding issues - REMOVED: Using .env file directly now
+# os.environ["DATABASE_URL"] = ...
+# os.environ["BETTER_AUTH_SECRET"] = ...
+# os.environ["OPENROUTER_API_KEY"] = ...
+# os.environ["GOOGLE_API_KEY"] = ...
+
+from dotenv import load_dotenv
 
 # Add the current directory to sys.path to prioritize local modules
 current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Explicitly load .env file
+env_path = os.path.join(current_dir, '.env')
+load_dotenv(env_path)
+print(f"Loaded env from {env_path}")
+print(f"OPENROUTER_API_KEY available: {'Yes' if os.getenv('OPENROUTER_API_KEY') else 'No'}")
 
 sys.path.insert(0, current_dir)
 
@@ -22,7 +30,7 @@ from sqlmodel import SQLModel
 from database.session import engine
 
 # Disable redirect_slashes to avoid 307 redirects that cause CORS issues
-app = FastAPI(title="Todo API", version="1.0.0")
+app = FastAPI(title="Todo API", version="1.0.0", redirect_slashes=False)
 
 
 @app.on_event("startup")

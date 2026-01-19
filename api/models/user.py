@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel, EmailStr
 from sqlmodel import SQLModel, Field
 from typing import Optional
@@ -14,8 +15,8 @@ class User(SQLModel, table=True):
     # Better Auth uses camelCase columns
     emailVerified: Optional[bool] = Field(default=False, alias="emailVerified")
     image: Optional[str] = None
-    createdAt: Optional[str] = Field(default=None, alias="createdAt")
-    updatedAt: Optional[str] = Field(default=None, alias="updatedAt")
+    createdAt: Optional[datetime] = Field(default=None, alias="createdAt")
+    updatedAt: Optional[datetime] = Field(default=None, alias="updatedAt")
 
 
 # Pydantic models for API

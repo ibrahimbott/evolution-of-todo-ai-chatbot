@@ -21,10 +21,9 @@ router = APIRouter()
 # --- Configuration ---
 # Order of preference for unlimited/free models
 OPENROUTER_MODELS = [
-    "google/gemini-2.0-flash-exp:free",
-    "openai/gpt-oss-20b", # From user screenshot
+    "openai/gpt-4o-mini", # Better and cheaper than 3.5
+    "google/gemini-1.5-flash",
     "meta-llama/llama-3.2-3b-instruct:free",
-    "mistralai/mistral-7b-instruct:free",
 ]
 
 # --- Models ---
@@ -494,7 +493,12 @@ def chat_with_ai(
             return ChatResponse(response=text_response, source=source)
             
         except Exception as google_e:
-            raise HTTPException(status_code=500, detail=f"All AI Services Failed. OpenRouter: {e}, Google: {google_e}")
+            # Instead of crashing, return a helpful message to the user
+            error_msg = "⚠️ **System Error**: I am unable to connect to the AI services.\n\n" \
+                        "This usually means the **API Keys** in the server configuration are missing or invalid.\n" \
+                        "Please check the `api/.env` file and update `OPENROUTER_API_KEY`."
+            print(f"All AI providers failed. Returning error message to user. OR Error: {e}")
+            return ChatResponse(response=error_msg, source="System Error")
 
 
 # --- Chat History Endpoints ---

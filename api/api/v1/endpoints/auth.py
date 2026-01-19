@@ -60,14 +60,14 @@ def signup(user_data: UserSignup, session: Session = Depends(get_session)):
     
     # Create new user
     user_id = str(uuid.uuid4())
-    now = datetime.utcnow().isoformat()
+    # now = datetime.utcnow().isoformat() # REMOVED: using datetime object directly
     new_user = User(
         id=user_id,
         email=user_data.email,
         name=user_data.name,
         password_hash=hash_password(user_data.password),
-        createdAt=now,
-        updatedAt=now,
+        createdAt=datetime.utcnow(),
+        updatedAt=datetime.utcnow(),
         emailVerified=False
     )
     
